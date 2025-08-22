@@ -82,14 +82,14 @@
                 <h2 id="design-title" class="section-title">造型与装备</h2>
                 <ul class="design-list">
                     <li>
-                        长至膝的深紫发用蝴蝶结轻束，搭配如水晶般的紫瞳，第一印象“美得宛如暴力” :contentReference[oaicite:3]{index=3}。
+                        长至膝的深紫发用蝴蝶结轻束，搭配如水晶般的紫瞳，第一印象“美得宛如暴力”
                     </li>
                     <li>
                         Astral Dress（神威灵装·十番）融合公主裙与铠甲，背部开口、裙摆渐变粉白，武装肩铠与护甲装饰整体既柔美又坚韧
-                        :contentReference[oaicite:4]{index=4}。
+
                     </li>
                     <li>
-                        Inverse（暴虐形态）时发色渐变紫白，眼瞳转为红紫，服装变得深紫更暴露，武装更具攻击性 :contentReference[oaicite:5]{index=5}。
+                        Inverse（暴虐形态）时发色渐变紫白，眼瞳转为红紫，服装变得深紫更暴露，武装更具攻击性
                     </li>
                 </ul>
             </section>
@@ -143,7 +143,7 @@
 // 简单加一点交互效果：图片视差（鼠标移动）、prefers-reduced-motion 检测
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 
-const particleCanvas = ref < HTMLCanvasElement | null > (null);
+const particleCanvas = ref<HTMLCanvasElement | null>(null);
 let rafId: number | null = null;
 let mouseX = 0;
 let mouseY = 0;
@@ -589,6 +589,78 @@ onBeforeUnmount(() => {
                 margin: 0;
                 color: rgba(238, 241, 255, 0.9);
                 font-size: 14px;
+            }
+        }
+    }
+}
+
+/* panel--design 样式：突出“造型与形态”信息 */
+.panel--design {
+    @extend .panel;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #f3c0d9, #ffffff, #8b5cf6);
+        border-radius: 2px;
+    }
+
+    .design-list {
+        margin-top: 12px;
+        list-style: disc inside;
+
+        &>li {
+            margin-bottom: 8px;
+            padding-left: 6px;
+            color: #e5e8f1;
+            line-height: 1.6;
+            font-size: 14px;
+            transition: color .3s;
+
+            &:hover {
+                color: #fafcff;
+            }
+        }
+    }
+}
+
+/* panel--extra 样式：信息提示风格 */
+.panel--extra {
+    @extend .panel;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(34, 211, 238, 0.02));
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+
+    .extra-list {
+        margin-top: 12px;
+        padding-left: 20px;
+        list-style: none;
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 18px;
+            font-size: 14px;
+            color: #e8ebf7;
+            line-height: 1.55;
+
+            &::before {
+                content: '•';
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: #8b5cf6;
+                font-size: 18px;
+                line-height: 1;
+            }
+
+            strong {
+                color: #ffffff;
             }
         }
     }
