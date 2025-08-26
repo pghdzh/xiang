@@ -18,6 +18,14 @@ const router = createRouter({
       path: "/timeline",
       component: () => import("@/views/timelineView/index.vue"),
     },
+    {
+      path: "/gallery",
+      component: () => import("@/views/galleryView/index.vue"),
+    },
+    {
+      path: "/messages",
+      component: () => import("@/views/messagesView/index.vue"),
+    },
   ],
   scrollBehavior() {
     return { top: 0 };
