@@ -24,11 +24,7 @@
       </div>
       <div class="messages" ref="msgList">
         <transition-group name="msg" tag="div">
-          <div
-            v-for="msg in chatLog"
-            :key="msg.id"
-            :class="['message', msg.role, { error: msg.isError }]"
-          >
+          <div v-for="msg in chatLog" :key="msg.id" :class="['message', msg.role, { error: msg.isError }]">
             <div class="avatar" :class="msg.role"></div>
             <div class="bubble">
               <div class="content" v-html="msg.text"></div>
@@ -49,43 +45,22 @@
       </div>
       <form class="input-area" @submit.prevent="sendMessage">
         <!-- 输入框改成 textarea -->
-        <textarea
-          v-model="input"
-          placeholder="向惠提问…"
-          :disabled="loading"
-          @keydown="handleKeydown"
-          rows="1"
-        ></textarea>
+        <textarea v-model="input" placeholder="向香香提问…" :disabled="loading" @keydown="handleKeydown" rows="1"></textarea>
 
         <!-- 清空按钮 -->
         <div class="btn-group">
-          <button
-            type="button"
-            class="clear-btn"
-            @click="clearChat"
-            :disabled="loading"
-            title="清空对话"
-          >
+          <button type="button" class="clear-btn" @click="clearChat" :disabled="loading" title="清空对话">
             ✖
           </button>
         </div>
 
         <!-- 发送按钮 -->
-        <button
-          type="submit"
-          class="send-btn"
-          :disabled="!input.trim() || loading"
-        >
+        <button type="submit" class="send-btn" :disabled="!input.trim() || loading">
           发送
         </button>
 
         <!-- 统计数据按钮 -->
-        <button
-          type="button"
-          class="Alldetail-btn"
-          @click="showModal = true"
-          title="查看统计"
-        >
+        <button type="button" class="Alldetail-btn" @click="showModal = true" title="查看统计">
           统计数据
         </button>
       </form>
@@ -137,10 +112,10 @@ import {
 } from "vue";
 import { sendMessageToHui } from "@/api/deepseekApi";
 
-const STORAGE_KEY = "hui_chat_log";
+const STORAGE_KEY = "xiang_chat_log";
 
 // 本地存储键名
-const STORAGE_STATS_KEY = "hui_chat_stats";
+const STORAGE_STATS_KEY = "xiang_chat_stats";
 const showModal = ref(false);
 // Stats 类型声明，确保所有字段都有默认值
 interface Stats {
@@ -375,14 +350,12 @@ onBeforeUnmount(() => {
 .chat-page {
   padding-top: 64px;
   min-height: 100vh;
-  background-color: #fff6f9;
-  background-image: linear-gradient(
-    145deg,
-    #fff6f9 0%,
-    #fff1f4 40%,
-    #eef6fb 100%
-  );
-  color: #5b463f;
+  background-color: #f7f8ff;
+  background-image: linear-gradient(145deg,
+      #f7f8ff 0%,
+      #eef1ff 40%,
+      #e6f0ff 100%);
+  color: #2c2e4a;
   display: flex;
   flex-direction: column;
 
@@ -398,37 +371,40 @@ onBeforeUnmount(() => {
     .stats-panel {
       display: flex;
       align-items: center;
-      background: rgba(255, 250, 245, 0.95); /* 奶油纸质底 */
+      background: rgba(245, 248, 255, 0.95);
+      /* 冷色纸质底 */
       backdrop-filter: blur(4px);
       padding: 8px 16px;
       border-radius: 12px;
       font-size: 14px;
-      color: #5b463f; /* 暖棕文字 */
+      color: #2c2e4a;
+      /* 深蓝文字 */
       justify-content: space-around;
-      box-shadow: 0 6px 18px rgba(90, 70, 60, 0.06);
-      border: 1px solid rgba(199, 143, 123, 0.12);
+      box-shadow: 0 6px 18px rgba(40, 50, 90, 0.08);
+      border: 1px solid rgba(120, 130, 200, 0.18);
 
       .stat-item {
         .label {
           font-size: 12px;
-          color: #7a6254;
+          color: #5a5f87;
           margin-bottom: 4px;
           opacity: 0.9;
         }
 
         span {
-          color: #c97f7e; /* 暖粉色数字，低饱和 */
+          color: #5865f2;
+          /* 十香标志性的冷蓝紫色 */
           font-weight: 700;
           font-size: 15px;
-          text-shadow: 0 0 4px rgba(230, 200, 180, 0.3);
+          text-shadow: 0 0 4px rgba(120, 150, 255, 0.35);
         }
       }
 
       .detail-btn {
         background: transparent;
-        border: 1px solid rgba(199, 143, 123, 0.28); /* 暖棕描边 */
+        border: 1px solid rgba(120, 130, 200, 0.28);
         border-radius: 6px;
-        color: #7a6254;
+        color: #5a5f87;
         padding: 6px 12px;
         cursor: pointer;
         font-size: 13px;
@@ -436,8 +412,8 @@ onBeforeUnmount(() => {
           transform 0.12s;
 
         &:hover {
-          background: rgba(230, 200, 180, 0.18);
-          box-shadow: 0 8px 18px rgba(90, 70, 60, 0.06);
+          background: rgba(120, 130, 200, 0.15);
+          box-shadow: 0 8px 18px rgba(40, 50, 90, 0.08);
           transform: translateY(-2px);
         }
 
@@ -447,7 +423,7 @@ onBeforeUnmount(() => {
 
         &:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 6px rgba(199, 143, 123, 0.1);
+          box-shadow: 0 0 0 6px rgba(120, 130, 200, 0.15);
         }
       }
     }
@@ -461,21 +437,22 @@ onBeforeUnmount(() => {
     scroll-behavior: smooth;
   }
 
-  /* 加藤惠风格的消息气泡 */
   .message {
     display: flex;
     align-items: flex-start;
     margin-bottom: 12px;
-    color: #5b463f; /* 暖棕正文色 */
+    color: #2c2e4a;
+    /* 深蓝正文色 */
 
     &.user {
       flex-direction: row-reverse;
     }
 
     &.error .bubble {
-      background: rgba(229, 155, 156, 0.18); /* 柔粉错误提示 */
-      border: 1px solid rgba(209, 107, 165, 0.28);
-      box-shadow: 0 6px 18px rgba(209, 107, 165, 0.08);
+      background: rgba(140, 100, 200, 0.15);
+      /* 淡紫错误提示 */
+      border: 1px solid rgba(120, 80, 180, 0.28);
+      box-shadow: 0 6px 18px rgba(120, 80, 180, 0.1);
     }
 
     .avatar {
@@ -486,64 +463,60 @@ onBeforeUnmount(() => {
       background-size: cover;
       background-position: center;
       flex-shrink: 0;
-      box-shadow: 0 6px 16px rgba(90, 70, 60, 0.06); /* 暖棕柔光 */
+      box-shadow: 0 6px 16px rgba(40, 50, 90, 0.08);
       z-index: 10;
 
       &.bot {
-        background-image: url("@/assets/megumi_kato.png");
-        box-shadow: 0 8px 22px rgba(199, 143, 123, 0.12);
-        border: 2px solid rgba(255, 255, 255, 0.35); /* 头像外侧轻描 */
+        background-image: url("@/assets/avatar.webp");
+        box-shadow: 0 8px 22px rgba(120, 130, 200, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
       }
 
       &.user {
-        background: linear-gradient(180deg, #fff7f2, #fff1ee);
-        box-shadow: 0 6px 16px rgba(255, 228, 235, 0.6);
-        border: 1px solid rgba(199, 143, 123, 0.08);
+        background: linear-gradient(180deg, #f8faff, #eef2ff);
+        box-shadow: 0 6px 16px rgba(180, 200, 255, 0.5);
+        border: 1px solid rgba(120, 130, 200, 0.15);
       }
     }
 
     .bubble {
       max-width: 78%;
-      background: rgba(255, 250, 245, 0.9); /* 纸质暖底 */
-      border: 1px solid rgba(199, 143, 123, 0.12);
+      background: rgba(245, 248, 255, 0.95);
+      /* 冷色纸质底 */
+      border: 1px solid rgba(120, 130, 200, 0.18);
       backdrop-filter: blur(6px);
       padding: 12px 16px;
       border-radius: 16px;
       line-height: 1.6;
       word-break: break-word;
-      box-shadow: 0 6px 16px rgba(90, 70, 60, 0.04);
+      box-shadow: 0 6px 16px rgba(40, 50, 90, 0.06);
       transition: box-shadow 0.18s, transform 0.12s, background 0.12s;
-      color: #5b463f; /* 与整体文字色统一 */
+      color: #2c2e4a;
 
       &:hover {
-        box-shadow: 0 10px 26px rgba(90, 70, 60, 0.06);
+        box-shadow: 0 10px 26px rgba(40, 50, 90, 0.08);
         transform: translateY(-2px);
       }
 
       &.loading {
-        color: rgba(91, 70, 63, 0.7);
+        color: rgba(44, 46, 74, 0.7);
         opacity: 0.95;
       }
 
-      /* bot 消息 — 微妙的左侧“尾巴”视觉（通过圆角处理）*/
       .message.bot & {
         border-radius: 16px 16px 16px 6px;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 247, 242, 0.95),
-          rgba(255, 236, 238, 0.88)
-        );
+        background: linear-gradient(135deg,
+            rgba(240, 245, 255, 0.95),
+            rgba(220, 225, 255, 0.88));
       }
 
-      /* user 消息 — 右侧“尾巴” */
       .message.user & {
         border-radius: 16px 16px 6px 16px;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 247, 242, 0.95),
-          rgba(252, 241, 238, 0.92)
-        );
+        background: linear-gradient(135deg,
+            rgba(240, 245, 255, 0.95),
+            rgba(230, 235, 255, 0.9));
       }
+
       .dots {
         display: inline-flex;
         align-items: center;
@@ -568,6 +541,7 @@ onBeforeUnmount(() => {
         }
 
         @keyframes blink {
+
           0%,
           100% {
             opacity: 0;
@@ -581,46 +555,44 @@ onBeforeUnmount(() => {
     }
   }
 
-  /* 加藤惠风格的输入区（替换原来的 .input-area） */
   .input-area {
     position: sticky;
     bottom: 12px;
     display: flex;
     align-items: center;
-    background: rgba(255, 250, 245, 0.96); /* 米白暖底 */
+    background: rgba(245, 248, 255, 0.96);
     backdrop-filter: blur(6px);
     padding: 10px;
     gap: 8px;
     z-index: 10;
     border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(90, 70, 60, 0.08);
-    border: 1px solid rgba(200, 180, 160, 0.3);
+    box-shadow: 0 6px 18px rgba(40, 50, 90, 0.1);
+    border: 1px solid rgba(120, 130, 200, 0.25);
 
-    /* 文本输入区使用 textarea（自动扩展） */
     textarea {
       flex: 1;
       padding: 0 14px;
-      background: rgba(255, 255, 255, 0.9); /* 纸质感 */
-      border: 1px solid rgba(200, 180, 160, 0.35);
-      color: #5b463f; /* 暗棕，保证可读 */
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(120, 130, 200, 0.25);
+      color: #2c2e4a;
       font-size: 15px;
       line-height: 1.45;
       outline: none;
-      resize: none; /* 禁止拖拽改变大小 */
-      overflow: hidden; /* 自动扩展时不出现滚动条 */
+      resize: none;
+      overflow: hidden;
       min-height: 44px;
-      max-height: 160px; /* 最多扩展到 ~6 行 */
+      max-height: 160px;
       border-radius: 10px;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
       transition: box-shadow 0.12s, border-color 0.12s;
 
       &::placeholder {
-        color: rgba(90, 63, 82, 0.35);
+        color: rgba(44, 46, 74, 0.35);
       }
 
       &:focus {
-        border-color: #e6a5a0;
-        box-shadow: 0 0 0 4px rgba(230, 165, 160, 0.12);
+        border-color: #6a78ff;
+        box-shadow: 0 0 0 4px rgba(106, 120, 255, 0.15);
       }
     }
 
@@ -637,15 +609,15 @@ onBeforeUnmount(() => {
         padding: 0;
         border: none;
         border-radius: 10px;
-        background: rgba(230, 200, 180, 0.12);
-        color: #7a6254;
+        background: rgba(120, 130, 200, 0.15);
+        color: #2c2e4a;
         cursor: pointer;
         transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
-        box-shadow: 0 2px 6px rgba(90, 70, 60, 0.04);
-        margin: 0 auto;
+        box-shadow: 0 2px 6px rgba(40, 50, 90, 0.05);
+
         &:hover {
           transform: translateY(-2px);
-          background: rgba(230, 200, 180, 0.22);
+          background: rgba(120, 130, 200, 0.25);
         }
 
         &:active {
@@ -664,24 +636,23 @@ onBeforeUnmount(() => {
       }
     }
 
-    /* 发送主按钮——温柔但明显 */
     .send-btn {
       padding: 0 22px;
       height: 40px;
       border: none;
       border-radius: 20px;
-      background: linear-gradient(135deg, #f3d6c6, #c78f7b); /* 米粉渐变 */
-      color: #fff8f5;
+      background: linear-gradient(135deg, #6a78ff, #4a52c8);
+      color: #f8faff;
       font-weight: 600;
       font-size: 15px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(199, 143, 123, 0.16);
+      box-shadow: 0 8px 20px rgba(90, 100, 200, 0.25);
       transition: transform 0.12s, box-shadow 0.18s, filter 0.12s;
 
       &:hover:not(:disabled) {
         transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(199, 143, 123, 0.2);
-        filter: saturate(1.03);
+        box-shadow: 0 12px 30px rgba(90, 100, 200, 0.28);
+        filter: saturate(1.05);
       }
 
       &:disabled {
@@ -694,36 +665,33 @@ onBeforeUnmount(() => {
 
       &:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 4px rgba(199, 143, 123, 0.12);
+        box-shadow: 0 0 0 4px rgba(106, 120, 255, 0.18);
       }
     }
 
-    /* 统计数据按钮（次要） */
     .Alldetail-btn {
       display: none;
       margin-left: 4px;
       background: transparent;
-      border: 1px solid rgba(199, 143, 123, 0.35);
+      border: 1px solid rgba(120, 130, 200, 0.3);
       border-radius: 6px;
       padding: 6px 10px;
-      color: #7a6254;
+      color: #2c2e4a;
       font-size: 13px;
       cursor: pointer;
       transition: background 0.12s, box-shadow 0.12s;
 
       &:hover {
-        background: rgba(230, 200, 180, 0.18);
-        box-shadow: 0 6px 14px rgba(90, 70, 60, 0.04);
+        background: rgba(120, 130, 200, 0.15);
+        box-shadow: 0 6px 14px rgba(40, 50, 90, 0.06);
       }
     }
   }
 
-  /* 加藤惠风格的模态框 */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    /* 稍暖的暗色遮罩，让弹窗像翻出的一页纸 */
-    background: rgba(45, 36, 32, 0.72);
+    background: rgba(20, 20, 40, 0.72);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -733,24 +701,23 @@ onBeforeUnmount(() => {
     .modal-content {
       width: 320px;
       max-width: 100%;
-      background: rgba(255, 250, 245, 0.98); /* 奶油纸质底 */
+      background: rgba(245, 248, 255, 0.98);
       backdrop-filter: blur(6px);
       border-radius: 14px;
       padding: 20px;
-      color: #5b463f; /* 暖棕文字 */
-      box-shadow: 0 10px 30px rgba(90, 70, 60, 0.12),
-        /* 柔和投影 */ inset 0 1px 0 rgba(255, 255, 255, 0.7); /* 纸张高光 */
-      border: 1px solid rgba(199, 143, 123, 0.22); /* 细腻边框 */
+      color: #2c2e4a;
+      box-shadow: 0 10px 30px rgba(40, 50, 90, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(120, 130, 200, 0.25);
       animation: fadeInUp 220ms ease;
 
-      /* 小装饰（左上角的手写贴纸感） */
       &::before {
-        content: "♡";
+        content: "✦";
         position: absolute;
         left: 14px;
         top: 10px;
         font-size: 14px;
-        color: rgba(199, 143, 123, 0.9);
+        color: rgba(106, 120, 255, 0.9);
         background: rgba(255, 255, 255, 0);
         transform: translateY(-2px);
         pointer-events: none;
@@ -761,10 +728,9 @@ onBeforeUnmount(() => {
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        color: #c78f7b; /* 奶茶粉标题色 */
+        color: #4a52c8;
         padding-bottom: 8px;
-        /* 微手写/纸感下划线（可删） */
-        border-bottom: 1px dashed rgba(199, 143, 123, 0.14);
+        border-bottom: 1px dashed rgba(120, 130, 200, 0.18);
       }
 
       .detail-list {
@@ -773,14 +739,14 @@ onBeforeUnmount(() => {
         margin: 12px 0 18px;
         line-height: 1.6;
         font-size: 14px;
-        color: #5b463f;
+        color: #2c2e4a;
 
         li {
           margin-bottom: 8px;
           padding-left: 6px;
 
           &:nth-child(odd) {
-            color: #6f5648; /* 稍深一点的棕，便于区分行 */
+            color: #41436d;
           }
 
           &:last-child {
@@ -793,19 +759,19 @@ onBeforeUnmount(() => {
         display: block;
         margin: 0 auto;
         padding: 8px 20px;
-        background: linear-gradient(135deg, #f3d6c6, #c78f7b); /* 米粉渐变 */
-        color: #fff8f5;
+        background: linear-gradient(135deg, #6a78ff, #4a52c8);
+        color: #f8faff;
         border: none;
         border-radius: 10px;
         cursor: pointer;
         font-weight: 600;
-        box-shadow: 0 8px 20px rgba(199, 143, 123, 0.14);
+        box-shadow: 0 8px 20px rgba(90, 100, 200, 0.2);
         transition: transform 0.12s ease, box-shadow 0.14s ease, filter 0.12s;
 
         &:hover {
           transform: translateY(-3px);
-          box-shadow: 0 12px 28px rgba(199, 143, 123, 0.18);
-          filter: saturate(1.03);
+          box-shadow: 0 12px 28px rgba(90, 100, 200, 0.25);
+          filter: saturate(1.05);
         }
 
         &:active {
@@ -814,24 +780,23 @@ onBeforeUnmount(() => {
 
         &:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 6px rgba(199, 143, 123, 0.1);
+          box-shadow: 0 0 0 6px rgba(106, 120, 255, 0.15);
         }
       }
     }
 
-    /* 动画 */
     @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(8px) scale(0.995);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
       }
     }
 
-    /* 移动端微调：更窄但留白充足 */
     @media (max-width: 480px) {
       .modal-content {
         width: 100%;

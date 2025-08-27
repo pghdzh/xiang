@@ -153,8 +153,8 @@ export default function threeTohkaBg(containerRef: { value: HTMLElement | null }
       varying vec2 vUv;
       void main(){
         vec3 p = position;
-        float t = uTime * aSpeed * 0.1 + position.x * 0.01;
-        p.y -= fract(t) * 20.0 * (0.6 + 0.8 * aSpeed);
+        float t = uTime * aSpeed * 0.01 + position.x * 0.01;
+        p.y -= fract(t) * 40.0 * (0.6 + 0.8 * aSpeed);
         float sway = sin(t * 2.0 + position.z * 0.3) * 6.0;
         p.x += sway;
         vAlpha = 0.7 * (0.8 + 0.2 * sin(uTime + aSpeed));

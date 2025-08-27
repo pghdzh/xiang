@@ -26,6 +26,14 @@ const router = createRouter({
       path: "/messages",
       component: () => import("@/views/messagesView/index.vue"),
     },
+    {
+      path: "/talk",
+      component: () => import("@/views/talkView/index.vue"),
+    },
+    {
+      path: "/2048",
+      component: () => import("@/views/2048View/index.vue"),
+    },
   ],
   scrollBehavior() {
     return { top: 0 };

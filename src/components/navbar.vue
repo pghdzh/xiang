@@ -30,7 +30,9 @@ const links = ref([
   { name: '人物概览', path: '/overview' },
   { name: '剧情时间线', path: '/timeline' },
   { name: '图集', path: '/gallery' },
-  { name: '留言板', path: '/messages' }
+  { name: '留言板', path: '/messages' },
+  { name: '与香对话', path: '/talk' },
+  { name: '2048', path: '/2048' }
 ])
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20;
