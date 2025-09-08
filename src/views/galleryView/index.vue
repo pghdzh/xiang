@@ -57,7 +57,7 @@
         <h3>批量上传图片</h3>
         <div class="tip-container">
           <ul class="tips-list">
-            <li>审核规则：1.不要 AI 图 2.不要色情倾向 3.要我能认出是惠惠。</li>
+            <li>审核规则：1.不要 AI 图 2.不要色情倾向 3.要我能认出是香香。</li>
             <li>
               由于没有用户系统，我这边不好做审核反馈，但只要显示上传成功，我这边肯定能收到。
             </li>
@@ -824,7 +824,7 @@ $highlight: #ffd700;
     }
   }
 
-  /* 上传按钮 — 加藤惠风格 */
+  
   .upload-btn {
     position: fixed;
     bottom: 24px;
