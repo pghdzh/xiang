@@ -164,7 +164,7 @@ onUnmounted(() => {
       transition: max-height 0.3s ease;
 
       &.is-open {
-        max-height: 300px;
+        max-height: 500px;
 
         li {
           margin: 1rem 0;

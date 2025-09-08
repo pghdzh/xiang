@@ -1,16 +1,13 @@
 <template>
     <div class="tohka-2048">
+        <div class="title-area">
+            <h1>十香的2048</h1>
+            <p class="subtitle">合并相同的头像，得到更高的羁绊</p>
+        </div>
         <header class="hud">
             <div class="left-controls">
                 <button class="btn small" @click="handleNewGame">新游戏</button>
-                <button class="btn small" @click="undo" :disabled="!canUndo">撤销</button>
             </div>
-
-            <div class="title-area">
-                <h1>十香的2048</h1>
-                <p class="subtitle">合并相同的头像，得到更高的羁绊</p>
-            </div>
-
             <div class="scores">
                 <div class="score">
                     <div class="label">得分</div>
@@ -358,6 +355,25 @@ $board-max: 560px; // 更大的最大值，便于桌面显示
     background: radial-gradient(1200px 400px at 10% 10%, rgba(138, 95, 191, 0.08), transparent), #07040a;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 
+    .title-area {
+        text-align: center;
+        flex: 1;
+
+        h1 {
+            margin: 0;
+            font-size: 1.45rem;
+            color: $accent;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+    }
+
     .hud {
         display: flex;
         align-items: center;
@@ -375,24 +391,7 @@ $board-max: 560px; // 更大的最大值，便于桌面显示
             }
         }
 
-        .title-area {
-            text-align: center;
-            flex: 1;
 
-            h1 {
-                margin: 0;
-                font-size: 1.45rem;
-                color: $accent;
-                letter-spacing: 1px;
-                font-weight: 800;
-            }
-
-            .subtitle {
-                margin: 0;
-                font-size: 0.9rem;
-                opacity: 0.95;
-            }
-        }
 
         .scores {
             display: flex;
@@ -785,9 +784,7 @@ $board-max: 560px; // 更大的最大值，便于桌面显示
                 }
             }
 
-            .scores {
-                display: none
-            }
+
         }
 
         .mobile-hint {

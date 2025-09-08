@@ -1149,8 +1149,8 @@ $highlight: #ffd700;
         }
 
         .rank {
-          width: 34px;
-          height: 34px;
+          width: 24px;
+          height: 24px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -1168,9 +1168,6 @@ $highlight: #ffd700;
           padding: 0 10px;
           font-size: 0.9rem;
           color: #e9e6f5;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
           text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
         }
 
@@ -1178,7 +1175,7 @@ $highlight: #ffd700;
           font-size: 0.85rem;
           color: #8f63ff;
           font-weight: 700;
-          min-width: 48px;
+          min-width: 30px;
           text-align: right;
         }
 
