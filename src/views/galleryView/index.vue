@@ -1,7 +1,6 @@
 <template>
   <div class="gallery-container">
     <button class="upload-btn" @click="openUploadModal">上传图片</button>
-
     <section class="gallery section">
       <div class="sort-controls">
         <button @click="toggleSort" class="sort-btn">
